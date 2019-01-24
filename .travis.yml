@@ -13,6 +13,7 @@ before_install:
 - cp .travis/ssh_config ~/.ssh/config
 - git config --global user.name 'dongsuo'
 - git config --global user.email xuxiaofei1.0@outlook.com
+- sudo rm -rf .deploy_git
 install:
 - npm install hexo-cli -g
 - LIBSASS_EXT="no" npm install
