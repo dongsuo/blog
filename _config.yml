@@ -70,7 +70,7 @@ theme: apollo
 deploy:
   type: git
   branch: newPost
-  repo: git@github.com:dongsuo/MyBlog.git
+  repo: git@github.com:dongsuo/blog.git
   message:
 
 # Google analysis
