@@ -24,7 +24,7 @@ before_install:
 # 安装依赖
 install:
 - npm install hexo-cli -g
-- npm install
+- LIBSASS_EXT="no" npm install
 
 # 部署的命令
 script:
