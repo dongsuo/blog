@@ -3,7 +3,7 @@ node_js:
 - '8'
 branches:
   only:
-  - master
+  - hexo
 
 cache:
   directories:
@@ -19,9 +19,6 @@ before_install:
 - sudo ssh-add .travis/id_rsa
 # - ssh -T git@github.com
 - cp .travis/ssh_config ~/.ssh/config
-- git config --global user.name 'dongsuo'
-- git config --global user.email xuxiaofei1.0@outlook.com
-- sudo rm -rf .deploy_git
 install:
 - npm install hexo-cli -g
 - LIBSASS_EXT="no" npm install
@@ -31,7 +28,12 @@ script:
 after_script:
   - cd ./public
   - git init
+  - git config --global user.name 'dongsuo'
+  - git config --global user.email 'xuxiaofei1.0@outlook.com'
   - git add .
   - git commit -m "Deploy blog pages"
-  - git push --force --quiet "https://${GH_TOKEN}@github.com/dongsuo/blog.git" master:gh-pages
+  - git push --force --quiet "https://${GitHub_token}@${GH_REF}" master:master
 
+env:
+    global:
+        - GH_REF: github.com/dongsuo/blog.git #设置GH_REF，注意更改成自己的仓库地址
