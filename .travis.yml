@@ -33,5 +33,5 @@ after_script:
   - git init
   - git add .
   - git commit -m "Deploy blog pages"
-  - git push --force --quiet "https://${GH_TOKEN}@github.com/dongsuo/blog" gh-pages:gh-pages
+  - git push --force --quiet "https://${GH_TOKEN}@github.com/dongsuo/blog" master:gh-pages
 
