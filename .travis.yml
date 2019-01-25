@@ -12,7 +12,7 @@ before_install:
 - chmod 600 .travis/id_rsa
 - eval $(ssh-agent)
 - sudo ssh-add .travis/id_rsa
-- ssh -T git@github.com
+# - ssh -T git@github.com
 - cp .travis/ssh_config ~/.ssh/config
 - git config --global user.name 'dongsuo'
 - git config --global user.email xuxiaofei1.0@outlook.com
