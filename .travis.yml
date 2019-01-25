@@ -18,6 +18,7 @@ install:
 - npm install hexo-cli -g
 - LIBSASS_EXT="no" npm install
 script:
+- ssh -T git@github.com
 - npm run deploy
 cache:
   directories:
