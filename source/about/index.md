@@ -1,6 +1,7 @@
 ---
 title: About Me
-date: 2017-04-17 12:49:22
+date: {}
+published: true
 ---
 
 ## WHO AM I?
@@ -23,6 +24,6 @@ date: 2017-04-17 12:49:22
 
 我还有一枚微信公众号，虽然并不怎么更新：
 
-<img src="../../../resource/qr_wxmp.jpg" alt="搜索‘东索’关注我"/>
+<img src="../../../resource/qr_wxmp.jpg" alt="搜索‘理想一斤’关注我"/>
 
 最后，感谢你的关注。
