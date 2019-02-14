@@ -1,6 +1,7 @@
 ---
 title: About Me
-date: 2017-04-17 12:49:22
+date: {}
+published: true
 ---
 
 ## WHO AM I?
