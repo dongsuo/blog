@@ -75,3 +75,4 @@ deploy:
 
 # Google analysis
 google_analytics: UA-110850031-1
+ga: UA-110850031-1
