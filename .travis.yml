@@ -23,6 +23,7 @@ install:
 - npm install hexo-cli -g
 - LIBSASS_EXT="no" npm install
 script:
+- git config core.ignorecase false
 - hexo clean && hexo g
 
 after_script:
