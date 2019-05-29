@@ -1,7 +1,7 @@
 ---
 title: Angular4的QuickStart——With ES6 Not TypeScript
 date: 2017-06-02 18:30:12
-tags: Angular,ES6
+tags: [Angular,ES6]
 ---
 
 
@@ -139,7 +139,7 @@ class AppComponent {
             }),
         ];
     }
-    
+
     constructor () {}
 }
 
