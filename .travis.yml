@@ -28,15 +28,13 @@ script:
 
 after_script:
   - cd ./public
+  - echo "blog.islasher.com" > CNAME
   - git init
   - git config --global user.name 'dongsuo'
   - git config --global user.email 'xuxiaofei1.0@outlook.com'
   - git add .
   - git commit -m "Deploy blog pages"
   - git push --force "https://${REPO_TOKEN}@${GH_REF}" master:master
-
-deploy:
-  fqdn: blog.islasher.com
 
 env:
     global:
