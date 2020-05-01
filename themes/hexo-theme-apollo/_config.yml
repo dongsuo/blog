@@ -1,7 +1,9 @@
 menu:
+    Home: https://slasher.com
+    VisLib: https://vislib.best
     Blog: /
     Archive: /archives/
-    ABOUT: /about/
+    About: /about/
 
 favicon: /logo.png
 logo: /logo.png
