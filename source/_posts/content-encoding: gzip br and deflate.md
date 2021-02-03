@@ -1,5 +1,5 @@
 ---
-title: content-encoding: gzip br and deflate
+title: content-encoding gzip br and deflate
 date: 2020-05-06
 tags:
 ---
