@@ -6,6 +6,8 @@ tags:
 
 关于前端性能优化，我们都知道常见的一条是要开启gzip压缩，减少资源体积，但是，content-encoding 除了gzip还有别的选择吗？另外的几项选择都是什么意思呢？今天我们就来捋一捋：
 
+<!--more-->
+
 前几天看阮老师的科技爱好者周刊，提到NGINX官方写了[一篇文章](https://www.nginx.com/blog/help-the-world-by-healing-your-nginx-configuration/)介绍如何通过NGINX配置减少互联网流量，其中讲到开启gzip，于是我想起去check一下自己的 [https://v11nlab.com](https://v11nlab.com) 开gzip了没有。结果发现，竟然真的没有开gzip，但是……这个 br 又是什么呢：
 
 ![https://vis.imfast.io/1.png](https://vis.imfast.io/1.png)
