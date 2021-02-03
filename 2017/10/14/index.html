@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> JavaScript基础整理之数组(一) · DongSuo-东索的个人博客</title><meta name="description" content="JavaScript基础整理之数组(一) - Dongsuo/东索"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/logo.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://blog.islasher.com/atom.xml" title="DongSuo-东索的个人博客"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/logo.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="https://islasher.com" target="_blank" class="nav-list-link">HOME</a></li><li class="nav-list-item"><a href="https://v11nlab.com" target="_blank" class="nav-list-link">V11NLAB</a></li><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">JavaScript基础整理之数组(一)</h1><div class="post-info">Oct 14, 2017</div><div class="post-content"><p>数组应该是日常开发中最常见的数据结构了，虽然常见，但是却不一定能优雅地处理好，JavaScript中数组的处理方法很多，各个方法的参数、返回值、是否修改原数组等也容易记混。这些方法虽然都比较简单，但是初学的时候没怎么重视，后来在实际的项目中却发现，能否灵活地运用这些方法对开发进度还是有很大的影响的，所以在此整理一下，温故知新。</p>
+<a id="more"></a>
+<h4 id="array-slice-a-b"><a href="#array-slice-a-b" class="headerlink" title="array.slice(a,b)"></a>array.slice(a,b)</h4><ul>
+<li>描述：slice 接受两个参数：开始和结束的索引值，返回原数组的从a到b的一部分（包含a，不包含b），原数组不发生改变</li>
+<li>原数组：不变</li>
+<li>返回：原数组的从a到b的一部分（包含a，不包含b）</li>
+<li>可以将slice用于数组的浅复制</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</div><div class="line"><span class="keyword">let</span> arr2 = arr.slice(<span class="number">1</span>,<span class="number">3</span>);</div><div class="line"><span class="keyword">let</span> arr1 = arr.slice();</div><div class="line">arr1.push([<span class="number">6</span>])</div><div class="line"><span class="keyword">let</span> arr3 = arr1.slice();</div><div class="line">arr3[arr3.length<span class="number">-1</span>].push(<span class="number">7</span>)</div><div class="line"><span class="built_in">console</span>.log(arr)  <span class="comment">//[ 1, 2, 3, 4, 5 ]</span></div><div class="line"><span class="built_in">console</span>.log(arr1) <span class="comment">//[ 1, 2, 3, 4, 5, [ 6, 7 ] ]</span></div><div class="line"><span class="built_in">console</span>.log(arr2) <span class="comment">//[ 2, 3 ]</span></div><div class="line"><span class="built_in">console</span>.log(arr3) <span class="comment">////[ 1, 2, 3, 4, 5, [ 6, 7 ] ]</span></div></pre></td></tr></table></figure>
+<h4 id="array-splice-a-b-item1-item2…"><a href="#array-splice-a-b-item1-item2…" class="headerlink" title="array.splice(a,b,item1,item2…)"></a>array.splice(a,b,item1,item2…)</h4><ul>
+<li>描述：slice 接受三个参数：开始的索引值、要删除元素的个数、用于代替删除元素的内容，返回被删除的元素构成的数组，原数组</li>
+<li>原数组：变</li>
+<li>返回：被删除元素构成的数组</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</div><div class="line"><span class="keyword">let</span> arr3 = arr.splice(<span class="number">1</span>,<span class="number">2</span>,<span class="string">'m'</span>,<span class="string">'n'</span>,<span class="string">'p'</span>)</div><div class="line"><span class="built_in">console</span>.log(arr);<span class="comment">//[ 1, "m", "n", "p", 4, 5 ]</span></div><div class="line"><span class="built_in">console</span>.log(arr3);<span class="comment">//[ 2, 3 ]</span></div></pre></td></tr></table></figure>
+<h4 id="array-concat"><a href="#array-concat" class="headerlink" title="array.concat()"></a>array.concat()</h4><ul>
+<li>描述：concat 接受一个或多个参数，若参数为数组，则将该数组与原数组合并，若不为数组，则将该参数作为原数组的一个元素</li>
+<li>原数组：不变</li>
+<li>返回：合并后的新数组</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arr = [ <span class="number">1</span>, <span class="string">"m"</span>, <span class="string">"n"</span>, <span class="string">"p"</span>, <span class="number">4</span>, <span class="number">5</span> ]</div><div class="line"><span class="keyword">let</span> arr4 = arr.concat(<span class="string">'abcd'</span>,[<span class="number">100</span>,[<span class="number">101</span>]]);</div><div class="line"><span class="built_in">console</span>.log(arr)<span class="comment">//[ 1, "m", "n", "p", 4, 5 ]</span></div><div class="line"><span class="built_in">console</span>.log(arr4);<span class="comment">// [ 1, "m", "n", "p", 4, 5, "abcd", 100, [101] ]</span></div></pre></td></tr></table></figure>
+<h4 id="array-join"><a href="#array-join" class="headerlink" title="array.join()"></a>array.join()</h4><ul>
+<li><p>描述：join 接受一个参数，作为返回的字符串的分隔符，</p>
+</li>
+<li><p>原数组：不变</p>
+</li>
+<li><p>返回：以参数为分隔符的字符串</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arr = [ <span class="number">1</span>, <span class="string">"m"</span>, <span class="string">"n"</span>, <span class="string">"p"</span>, <span class="number">4</span>, <span class="number">5</span> ]</div><div class="line"><span class="keyword">let</span> str = arr.join(<span class="string">'-'</span>)</div><div class="line"><span class="built_in">console</span>.log(arr)<span class="comment">//[ 1, "m", "n", "p", 4, 5 ]</span></div><div class="line"><span class="built_in">console</span>.log(str)<span class="comment">//1-m-n-p-4-5</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="array-reverse"><a href="#array-reverse" class="headerlink" title="array.reverse()"></a>array.reverse()</h4><ul>
+<li><p>描述：无参数，将原数组的元素前后颠倒</p>
+</li>
+<li><p>原数组：变，顺序颠倒</p>
+</li>
+<li><p>返回：颠倒位置后的原数组</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arr = [ <span class="number">1</span>, <span class="string">"p"</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">5</span> ]</div><div class="line"><span class="keyword">let</span> arr6 = arr.reverse()</div><div class="line"><span class="built_in">console</span>.log(arr) <span class="comment">//[ 5, 4, 5, 4, "p", 1 ]</span></div><div class="line"><span class="built_in">console</span>.log(arr6) <span class="comment">//[ 5, 4, 5, 4, "p", 1 ]</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="array-toString"><a href="#array-toString" class="headerlink" title="array.toString()"></a>array.toString()</h4><ul>
+<li><p>描述：无参数，将原数组转换成字符串，以 ‘,’ 分割。（不可指定分隔符，比array.join()的功能弱）</p>
+</li>
+<li><p>原数组：不变</p>
+</li>
+<li><p>返回：字符串</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arr = [ <span class="number">5</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="string">"p"</span>, <span class="number">1</span> ]</div><div class="line"><span class="keyword">let</span> str1 = arr.toString()</div><div class="line"><span class="built_in">console</span>.log(arr)</div><div class="line"><span class="built_in">console</span>.log(str1)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="array-push-array-unshift"><a href="#array-push-array-unshift" class="headerlink" title="array.push()/array.unshift()"></a>array.push()/array.unshift()</h4><ul>
+<li><p>描述：将参数作为数组的元素，置于数组的尾部/头部</p>
+</li>
+<li><p>原数组：变</p>
+</li>
+<li><p>返回：新数组的长度</p>
+<p>​</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arr = [ <span class="number">1</span>, <span class="string">"p"</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span> ]  </div><div class="line"><span class="keyword">let</span> l = arr.push(<span class="number">8</span>)</div><div class="line"><span class="built_in">console</span>.log(l)<span class="comment">// 8</span></div><div class="line"><span class="built_in">console</span>.log(arr)<span class="comment">// [ 1, "p", 4, 5, 4, 5, 6, 8 ]</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> l2 = arr.unshift(<span class="number">0</span>)</div><div class="line"><span class="built_in">console</span>.log(l2) <span class="comment">//1</span></div><div class="line"><span class="built_in">console</span>.log(arr) <span class="comment">// [ 0, 1, "p", 4, 5, 4, 5, 6, 8 ]</span></div></pre></td></tr></table></figure>
+<h4 id="array-pop-array-shift"><a href="#array-pop-array-shift" class="headerlink" title="array.pop()/array.shift()"></a>array.pop()/array.shift()</h4><ul>
+<li>描述：分别去除数组的最后一个/第一个元素</li>
+<li>原数组：变</li>
+<li>返回：被删除的元素</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arr = [ <span class="number">0</span>, <span class="number">1</span>, <span class="string">"p"</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">8</span> ]</div><div class="line"><span class="keyword">let</span> ele = arr.shift();</div><div class="line"><span class="built_in">console</span>.log(ele)<span class="comment">//0</span></div><div class="line"><span class="built_in">console</span>.log(arr)<span class="comment">//[ 1, "p", 4, 5, 4, 5, 6, 8 ]</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> ele2 = arr.pop();</div><div class="line"><span class="built_in">console</span>.log(ele2)<span class="comment">//8</span></div><div class="line"><span class="built_in">console</span>.log(arr)<span class="comment">// [ 1, "p", 4, 5, 4, 5, 6 ]</span></div></pre></td></tr></table></figure>
+<h4 id="array-copyWithin-target-start-end-——ES6新增"><a href="#array-copyWithin-target-start-end-——ES6新增" class="headerlink" title="array.copyWithin(target,start,end)——ES6新增"></a>array.copyWithin(target,start,end)——ES6新增</h4><ul>
+<li><p>描述：接受三个参数，target为目标位置的索引，start 为待复制数据的起始索引，默认为0，end为待复制数据的结束索引（不包含），默认等于数组长度（最后一位元素的索引+1）</p>
+</li>
+<li><p>原数组：变，但不更改原数组的长度</p>
+</li>
+<li><p>返回：改变后的数组</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arr = [ <span class="number">1</span>, <span class="string">"m"</span>, <span class="string">"n"</span>, <span class="string">"p"</span>, <span class="number">4</span>, <span class="number">5</span> ]</div><div class="line"><span class="keyword">let</span> arr5 = arr.copyWithin(<span class="number">1</span>,<span class="number">3</span>,<span class="number">6</span>)</div><div class="line"><span class="built_in">console</span>.log(arr) <span class="comment">// [ 1, "p", 4, 5, 4, 5 ]</span></div><div class="line"><span class="built_in">console</span>.log(arr5) <span class="comment">// [ 1, "p", 4, 5, 4, 5 ]</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这只是数组的一部分，还有数组迭代、查询、浅复制、深复制等很多方法没有说，下次再说吧。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2018/01/16/" class="prev">PREV</a><a href="/2017/07/6/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2021 <a href="https://blog.islasher.com">Dongsuo/东索</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-110850031-1",'auto');ga('send','pageview');</script></body></html>

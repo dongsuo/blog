@@ -1,0 +1,86 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 《The Art of Readable Code》 读书笔记 · DongSuo-东索的个人博客</title><meta name="description" content="《The Art of Readable Code》 读书笔记 - Dongsuo/东索"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="/logo.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="https://blog.islasher.com/atom.xml" title="DongSuo-东索的个人博客"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/logo.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="https://islasher.com" target="_blank" class="nav-list-link">HOME</a></li><li class="nav-list-item"><a href="https://v11nlab.com" target="_blank" class="nav-list-link">V11NLAB</a></li><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="/about/" target="_self" class="nav-list-link">ABOUT</a></li></ul></header><main class="container"><div class="post"><article class="post-block"><h1 class="post-title">《The Art of Readable Code》 读书笔记</h1><div class="post-info">Oct 21, 2018</div><div class="post-content"><p>《The Art of Readable Code》是一本关于代码可读性的书，很薄，180页，我手中的版本是2012年6月由东南大学出版社出版的影印版，其英文原版则是2011年出版的，已经是一本7年前的书了。一般而言，IT技术的发展之快导致技术书籍中提到的技术很快就会过期，但是这本不同，书中的观点和知识至今仍对我的工作学习提供了不小的帮助，以至于我想通过一篇读书笔记来记录、整理书中的要点，便于以后时时翻阅、时时温习。</p>
+<a id="more"></a>
+<p>本书分为4大部分，15章，各章又细分为多个要点。本书的主旨可以归结为之前在网上看到的一句话：<em>代码</em>的目的<em>是给人</em>阅读的,只是顺便能让机器运行而已。进而言之，是如何提高代码的可读性。书中的四大部分从易到难、由浅至深地介绍了提高代码可读性的方法，以下则是我对该书主要内容的摘录和理解。</p>
+<h2 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h2><h3 id="1-代码应该易于理解"><a href="#1-代码应该易于理解" class="headerlink" title="1. 代码应该易于理解"></a>1. 代码应该易于理解</h3><p>在前言中，作者首先提出，通过对大量“bad code”的分析，他发现坏代码和好代码的区别就在于代码的可读性，进而，他提出了一个写可读性代码的原则：</p>
+<blockquote>
+<p>Code should be written to minimize the time it should take for someone else to understand.</p>
+</blockquote>
+<p>这一原则不仅适用于多人项目，同时也适用于个人项目，毕竟那个”someone else“可能就是六个月之后的你。</p>
+<h2 id="浅层的提升"><a href="#浅层的提升" class="headerlink" title="浅层的提升"></a>浅层的提升</h2><h3 id="2-把信息打包到命名中"><a href="#2-把信息打包到命名中" class="headerlink" title="2. 把信息打包到命名中"></a>2. 把信息打包到命名中</h3><ul>
+<li><p>选择更专指的单词</p>
+<p>其实这一点对中国程序员难度还是有一些的，毕竟词汇量还是太少，而且就算你的词汇量足以选择更专指的词汇，但是如果同事的词汇量不足以理解你的代码，那岂不是得不偿失？但是无论如何，我们总是可以在限定的词汇范围内选出更专指的单词，例如对于<code>BinaryTree</code>这个类来说，<code>NumNodes</code>就比<code>Size</code>要更合适一些。</p>
+</li>
+<li><p>避免通用的命名（或者知道什么时候用它们）</p>
+<p>像<code>tmp</code>这种命名应该尽量避免，因为你不知道这个命名代表来什么意思，应该尽量用有意义的命名来代替。当然，在有正当理由的时候，适当的使用并无问题。</p>
+</li>
+<li><p>选择具体的而不是抽象的命名</p>
+<p>例如Google的代码中有一个<code>DISALLOW_EVIL_CONSTRUCTORS</code>但是其实你并不知道Evil是什么意思，虽然你知道这是用于防止产生bug的代码。作者建议改为<code>DISALLOW_COPY_AND_ASSIGN</code>因为正是copy and assign导致来错误的发生。</p>
+</li>
+<li><p>通过前缀或者后缀在命名中附加额外的信息</p>
+<p>在命名中添加后缀/前缀来增加可读性，这个其实我们可能在实践中都用过而没注意，例如数据格式转换的时候，用名称+格式的方式来命名：<code>user_percent</code>用来表示百分比形式的用户数。除此之外，数据的单位/编码方式都可以放在前缀/后缀来表示更多信息</p>
+</li>
+<li><p>决定命名要多长</p>
+<p>命名越长，携带的信息越多，因此在比较大的作用域中，变量名更多，应该用更长的命名以便于区分不同的变量。</p>
+<p>命名长度现如今应该不是什么问题了，毕竟IDE都会有智能提示，即使是前端，代码也会被 uglify，而不需要考虑命名长度导致的代码体积的问题。因此如果在代码中要用简写的话，最好是大家都能懂的简写，否则不要轻易使用。当然在保证可读性的基础上，还是尽量短一些比较好。</p>
+</li>
+<li><p>选择命名的格式来打包进额外的信息</p>
+<p>例如全局变量用大写、构造函数首字母大写、html中id用驼峰、class用短横线分割等都属于此类。</p>
+</li>
+</ul>
+<h3 id="3-不会被误解的名称"><a href="#3-不会被误解的名称" class="headerlink" title="3. 不会被误解的名称"></a>3. 不会被误解的名称</h3><p>这一章举了一些例子用于说明一些命名的模糊性和易于产生误解的地方。一般而言，我们在代码中，应该选择一个单词最常见、常用的含义，避免那些生僻的含义，在命名时要多想一想，这个命名会不会让别人误以为是别的什么意思，有没有更合适、更专指的命名可以用在这个地方。</p>
+<h3 id="4-美学"><a href="#4-美学" class="headerlink" title="4.美学"></a>4.美学</h3><p>这一章主要讲代码的格式化问题，我想大多数程序员在写过一两年代码之后都会意识到这个问题的重要性。毕竟读、维护没有良好格式化的代码实在是一件十分头疼的事情。除了空格、缩紧之外，这一章来提到可以通过列对齐来保证可读性，可以通过将长代码分段、分块并注释来解决大量的变量初始化导致的大坨代码，最后，作者提出，团队约定优先于个人喜好，这算是对缩紧、大括号换行等经典争论的一个解决吧。当然，团队没有约定的话，那就先吵一架把它约定好吧。</p>
+<h3 id="5-如何写注释"><a href="#5-如何写注释" class="headerlink" title="5.如何写注释"></a>5.如何写注释</h3><p>首先，能通过代码表达的就不要用注释表达，信息冗余也会降低可读性</p>
+<p>其次，注释应该记录你的想法，提供你认为读懂这段代码所需要的额外信息，此外关于为什么选择一种方案而不是另一种方案、代码未来可以优化的地方以及代码中的常量的设置，都值得写上注释。</p>
+<p>然后，站在读者的角度，想象一下一个新来的同事看到你的代码会怎么想，会有怎样的困惑，这样你就知道要怎么写了。尤其是在方法和文件的开头，写一些总结性的注释，以免读者被一些细节纠结而丧失了对代码整体的理解。</p>
+<p>最后，不要怕写注释，不要怕语言组织不好，先写出来比较重要，不一定书面，口语也是可以的。</p>
+<h3 id="6-注释要紧凑精确"><a href="#6-注释要紧凑精确" class="headerlink" title="6.注释要紧凑精确"></a>6.注释要紧凑精确</h3><ul>
+<li>避免代词，他她它可能有多种指代</li>
+<li>尽可能简洁明了地描述一个方法的行为</li>
+<li>用方法的输入输出的例子来说明方法的行为时尽可能地覆盖各种情况P.S.类似于测试</li>
+<li>介绍代码更高层次的意图，而非那些明显的细节</li>
+<li>方法的参数可以用行内注释的形式来说明 P.S.前几天看潘神的代码，有更好的解决方案</li>
+<li>选择可以携带更多信息的词句来保持注释的简介</li>
+</ul>
+<h2 id="简化循环和代码逻辑"><a href="#简化循环和代码逻辑" class="headerlink" title="简化循环和代码逻辑"></a>简化循环和代码逻辑</h2><h3 id="7-让控制流易于阅读"><a href="#7-让控制流易于阅读" class="headerlink" title="7.让控制流易于阅读"></a>7.让控制流易于阅读</h3><p>控制流程主要是各种条件/循环语句，在代码中不可避免地会写一些条件/循环语句，本质上讲，这些语句都是对原有的自上而下运行的代码执行顺序的破坏。因此如果不注意的话，常常会导致代码的可读性变差。因此作者在这一章提出了一些建议以提高这种代码的可读性。</p>
+<ul>
+<li><p>条件判断中，更常变化的变量放在操作符左侧，常量/变化比较少的变量放在操作符右侧。如 <code>bytes_expected &gt;= bytes_received</code>就会很奇怪。</p>
+</li>
+<li><p>一般而言，if/else的顺序是先正后负、先积极后消极，例如：<code>if(a!==b){ }</code> 就比<code>if(a==b){ }</code>要别扭一些。当然，这也不是绝对的，如果是错误处理的话，<code>if(!error){}</code>就没那么奇怪，因此并没有统一的定则，还是要看你的代码会不会别扭、影响可读性。</p>
+</li>
+<li><p>谨慎使用三元操作符，只在简单的情况下使用，复杂的情况下，三元操作符会导致代码比较难以理解，即使这样可以使代码更短。</p>
+</li>
+<li><p>不要用do/while循环，这是很多错误和误解的根源。</p>
+</li>
+<li><p>在方法中早一点return。这一点相信很多人都见到过，这样就可以避免函数的最后是一堆大括号嵌套。</p>
+</li>
+<li><p>嵌套的条件/循环都是十分难以理解的，因此打破嵌套就很重要了，除了早一点return之外，合理地在循环中使用continue等也可以减少代码中的嵌套。</p>
+<p>其实在JavaScript中，对数组的遍历可以利用foreach, map, filter, some, every等，减少代码中[]的使用，也可以使代码更简洁更易读。</p>
+</li>
+</ul>
+<h3 id="8-打破大块的代码"><a href="#8-打破大块的代码" class="headerlink" title="8.打破大块的代码"></a>8.打破大块的代码</h3><p>大块的代码就像一坨shit，远远望过去堆得密密麻麻，让人只想敬而远之。改善这种shit代码的方法的一个有效途径是用命名合理清晰的变量代替一些表达式，将一些条件判断改写成更合理有效的表达式，</p>
+<h3 id="9-变量和可读性"><a href="#9-变量和可读性" class="headerlink" title="9.变量和可读性"></a>9.变量和可读性</h3><p>作者在这一章主要的意思是，变量越多，在阅读代码时需要记住、追踪的就越多；变量所处的作用域越大，需要记住这一变量的时间就越长；变量在代码运行过程中变化的地方越多，就需要你更频繁地去更新变量的状态。而这些都是对阅读者的脑力的考验，因此需要尽量去避免这些情况。</p>
+<p>##重新组织你的代码</p>
+<h3 id="10-抽出不相关的子问题"><a href="#10-抽出不相关的子问题" class="headerlink" title="10.抽出不相关的子问题"></a>10.抽出不相关的子问题</h3><p>作者在这一章的建议是，主动地去识别并抽取不相关的子问题。可以先对某一方法或者某一代码块的主要目标/根本目的做总结，然后看是不是有一些代码并不是直接服务于这一主要目标，如果存在的话，看一下是不是可以将这些代码抽出。久而久之就可以形成一些一般性的、通用的工具方法，可以在整个项目甚至整个团队中通用。当然，即使不是通用的而是强业务相关的方法，也是可以抽取出来的，只要能提高代码的可读性就是没问题的。</p>
+<h3 id="11-一次只处理一个任务"><a href="#11-一次只处理一个任务" class="headerlink" title="11.一次只处理一个任务"></a>11.一次只处理一个任务</h3><p>这一章其实与第10章的内容有些类似，但是从不同的角度来阐述而又有扩展。一次只处理一个任务是指把大的任务分成多个小任务来完成，每次只处理其中一个。这一建议不仅适用于方法的拆分，也适用于大块的代码，可以将大块的代码拆成多个小代码块。如果代码中遇到了这种可读性很差的大代码块可以试试这种方法，分析其中有多少小任务，尝试把这些小任务清晰地分离开来。</p>
+<h3 id="12-把想法转换成代码"><a href="#12-把想法转换成代码" class="headerlink" title="12.把想法转换成代码"></a>12.把想法转换成代码</h3><p>有的时候一段复杂的逻辑会导致代码混乱难懂，其中又混杂着各种细节和hack，代码就会变得更加混乱难以理解。这时候可以用作者在这一章中提出的方法，这一方法其实有点像著名的小黄鸭调试法(Rubber Duck Debugging)。先用自然语言描述一下你这段代码要完成的任务，然后抽取其中的关键词，写成代码。</p>
+<h3 id="13-少写代码"><a href="#13-少写代码" class="headerlink" title="13.少写代码"></a>13.少写代码</h3><blockquote>
+<p>The most readable code is no code at all.</p>
+</blockquote>
+<ol>
+<li>有时候，你的项目根本不需要那些功能。当然这应该是从产品的角度来考虑，所以说作为开发，一定要懂业务懂产品，这样才能把一些不必要的需求给砍掉，从而使自己的代码保持简洁易维护。</li>
+<li>需求不一定要完全实现，有的时候一个最小可用版本就可以实现产品的需求了，不需要把所有方面考虑得面面俱到。</li>
+<li>熟悉你用到的库和框架，能用现成的方法实现的功能就千万不要造轮子。</li>
+</ol>
+<h3 id="14-测试与可读性"><a href="#14-测试与可读性" class="headerlink" title="14. 测试与可读性"></a>14. 测试与可读性</h3><p>这一章主要是讲保持测试代码的可读性，说实话，我平时代码中用到的测试不多，毕竟前端设计到的大量UI层面很难去测试。作者在这一章提出的主要建议是：</p>
+<ol>
+<li>每个测试的顶层应该尽可能得简洁，而把一些细节外置。</li>
+<li>错误信息应该尽可能地详细，易于debug。</li>
+<li>测试的输入应该尽可能地简单易于理解。</li>
+<li>测试方法的命名应该有意义</li>
+</ol>
+<h3 id="15-设计并实现一个“分钟-小时计数器”"><a href="#15-设计并实现一个“分钟-小时计数器”" class="headerlink" title="15.设计并实现一个“分钟/小时计数器”"></a>15.设计并实现一个“分钟/小时计数器”</h3><p>这一章的主要内容是一个案例，在代码中应用了前面所说的主要方法，写出可读性高的代码。此处略去不表。</p>
+<h2 id="扩展阅读"><a href="#扩展阅读" class="headerlink" title="扩展阅读"></a>扩展阅读</h2><p>略</p>
+<p>以上就是《The Art of Readable Code》一书的主要内容，读完此书之后，我认为其中的大量观点和建议都很有参考价值，对于提高我们的代码质量很有帮助。当然其中一些方法和建议不是很容易在实际工作中应用，但是我觉得至少我们在写代码时应该始终存着一个念头：我这种写法会不会让其他人看不懂、这一段代码是不是很难理解。只要心中有这个想法，那我们就自然会着手想方设法提高我们代码的可读性，这时，书中的建议和方法就体现了他们的价值，会被我们运用到代码中去。</p>
+<p>##后记</p>
+<p>这是我个人读完的第一本英文技术书，谨以此文纪念。</p>
+</div></article></div></main><footer><div class="paginator"><a href="/2019/02/15/" class="prev">PREV</a><a href="/2018/01/16/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2021 <a href="https://blog.islasher.com">Dongsuo/东索</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-110850031-1",'auto');ga('send','pageview');</script></body></html>
